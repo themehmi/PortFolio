@@ -71,7 +71,7 @@ nav a:hover{
     color: #a7a7a7;
 }
 
-.btn-signing {
+.auth-buttons {
     background-color: #a7a7a7;
     color:black;
     padding: 0.8rem 2rem;
@@ -83,6 +83,23 @@ nav a:hover{
     cursor: pointer;
     z-index: 999;
 }
+.auth:hover{
+    background-color: white;
+}
+
+.btn-signing {
+    background-color: #a7a7a7;
+    color:black;
+    padding: 0.8rem 2rem;
+    border-radius: 50px;
+    border: none;
+    font-size: 1rem;
+    font-weight: 500;
+    transition: background-color 0.2s ease;
+    cursor: pointer;
+    z-index: 950;
+}
+
 .btn-signing:hover{
     background-color: white;
 }
