@@ -97,7 +97,7 @@ nav a:hover{
     font-weight: 500;
     transition: background-color 0.2s ease;
     cursor: pointer;
-    z-index: 999;
+    z-index: 950;
 }
 
 .btn-logging:hover{
