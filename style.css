@@ -86,6 +86,7 @@ nav a:hover{
 .btn-signing:hover{
     background-color: white;
 }
+
 .btn-logging {
     background-color: #a7a7a7;
     color:black;
@@ -98,6 +99,7 @@ nav a:hover{
     cursor: pointer;
     z-index: 999;
 }
+
 .btn-logging:hover{
     background-color: white;
 }
