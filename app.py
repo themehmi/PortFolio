@@ -41,45 +41,52 @@ def loginbtn():
 
 # --- Logic Routes ---
 
-@app.route('/register', methods=['POST'])
+@app.route('/register', methods=['GET', 'POST'])
 def register():
     if request.method == 'POST':
-        userName = request.form['username']
-        email = request.form['email']
-        password = request.form['password']
-        confirm_password = request.form['confirm_password']
+        try:
+            userName = request.form['username']
+            email = request.form['email']
+            password = request.form['password']
+            confirm_password = request.form['confirm_password']
 
-        if password != confirm_password:
-            return "Passwords do not match! <a href='/registerbtn'>Try again</a>"
+            if password != confirm_password:
+                return "Passwords do not match! <a href='/registerbtn'>Try again</a>"
 
-        conn = sqlite3.connect('developers.db')
-        c = conn.cursor()
-        c.execute("INSERT INTO developers (username, email, password) VALUES (?, ?, ?)", 
-                  (userName, email, password))
-        conn.commit()
-        conn.close()
-        return redirect(url_for('loginbtn'))
+            conn = sqlite3.connect('developers.db')
+            c = conn.cursor()
+            c.execute("INSERT INTO developers (username, email, password) VALUES (?, ?, ?)", 
+                      (userName, email, password))
+            conn.commit()
+            conn.close()
+            return redirect(url_for('loginbtn'))
+        except Exception as e:
+            return f"An error occurred: {e}"
     
+    # If someone types /register in browser, redirect to the actual form page
     return redirect(url_for('registerbtn'))
 
-@app.route('/login', methods=['POST'])
+@app.route('/login', methods=['GET', 'POST'])
 def login():
     if request.method == 'POST':
-        userName = request.form['username']
-        password = request.form['password']
-        
-        conn = sqlite3.connect('developers.db')
-        c = conn.cursor()
-        c.execute("SELECT * FROM developers WHERE username = ? AND password = ?", (userName, password))
-        user = c.fetchone()
-        conn.close()
-        
-        if user:
-            # Successful login - redirect to developers list
-            return redirect(url_for('developers'))
-        else:
-            return "Invalid Credentials. <a href='/loginbtn'>Go back</a>"
+        try:
+            userName = request.form['username']
+            password = request.form['password']
             
+            conn = sqlite3.connect('developers.db')
+            c = conn.cursor()
+            c.execute("SELECT * FROM developers WHERE username = ? AND password = ?", (userName, password))
+            user = c.fetchone()
+            conn.close()
+            
+            if user:
+                return redirect(url_for('developers'))
+            else:
+                return "Invalid Credentials. <a href='/loginbtn'>Go back</a>"
+        except Exception as e:
+            return f"An error occurred: {e}"
+            
+    # If someone types /login in browser, redirect to the actual form page
     return redirect(url_for('loginbtn'))
 
 @app.route('/developers')
