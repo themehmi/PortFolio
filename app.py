@@ -27,7 +27,7 @@ def projects():
     return render_template('projects.html')
 
 @app.route('/resources')
-def projects():
+def resources():
     return render_template('resources.html')
 
 @app.route('/register', methods=['POST', 'GET'])
