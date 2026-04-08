@@ -3,10 +3,217 @@
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>Projects | Narinder Singh</title>
-    <link rel="stylesheet" href="{{ url_for('static', filename='project__style.css') }}">
+    <title>Projects | Neym Portfolio</title>
+    <style>
+        * {
+            margin: 0;
+            padding: 0;
+            box-sizing: border-box;
+        }
+
+        body {
+            font-family: system-ui, -apple-system, sans-serif;
+            background-color: black;
+            color: #e7e7e7;
+            min-height: 100vh;
+            overflow-x: hidden;
+            line-height: 1.5;
+        }
+
+        /* --- Global Heritage Styles (from your Home Page) --- */
+        .image-gradient {
+            position: fixed;
+            top: 0;
+            right: 0;
+            opacity: 0.4;
+            z-index: -1;
+            pointer-events: none;
+        }
+
+        .layer-blur {
+            width: 30rem;
+            height: 0;
+            position: absolute;
+            top: 20px;
+            right: 0;
+            box-shadow: 0 0 700px 15px white;
+            rotate: -30deg;
+            z-index: -1;
+        }
+
+        .container { 
+            width: 100%;
+            padding: 0 5%;
+        }
+
+        header {
+            display: flex;
+            justify-content: space-between;
+            align-items: center;
+            padding: 1.5rem 0;
+            position: relative;
+            z-index: 1000;
+        }
+
+        header h1 {
+            font-family: 'Verdana';
+            font-size: 2.5rem;
+            font-weight: 300;
+        }
+
+        nav {
+            display: flex;
+            gap: 2rem;
+        }
+
+        nav a {
+            font-size: 0.9rem;
+            letter-spacing: 0.1rem;
+            text-decoration: none;
+            color: #a7a7a7;
+            transition: 0.3s;
+        }
+
+        nav a:hover, nav a.active {
+            color: white;
+        }
+
+        .btn-logging {
+            background-color: #a7a7a7;
+            color: black;
+            padding: 0.7rem 1.8rem;
+            border-radius: 50px;
+            border: none;
+            font-size: 0.9rem;
+            font-weight: 600;
+            cursor: pointer;
+            transition: 0.3s;
+        }
+
+        .btn-logging:hover {
+            background-color: white;
+        }
+
+        /* --- Projects Page Layout --- */
+        .projects-main {
+            padding: 4rem 0;
+            max-width: 1200px;
+            margin: 0 auto;
+        }
+
+        .projects-intro {
+            margin-bottom: 6rem;
+        }
+
+        .tag-box {
+            position: relative;
+            margin-bottom: 1.5rem;
+            width: 12rem;
+            height: 2.4rem;
+            border-radius: 50px;
+            background: linear-gradient(to right, #656565, #7f42a7,#6600c5,#5300a0,#757575,#656565);
+            background-size: 200%;
+            animation: animationGradient 2.5s linear infinite;
+        }
+
+        @keyframes animationGradient { to { background-position: 200%; } }
+
+        .tag-box .tag { 
+            position: absolute;
+            inset: 3px;
+            background-color: black;
+            border-radius: 50px;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            font-size: 0.85rem;
+            font-weight: bold;
+        }
+
+        .projects-main h1 {
+            font-size: clamp(3rem, 8vw, 6rem);
+            line-height: 1;
+            margin-bottom: 1.5rem;
+            text-shadow: 0 0 15px purple;
+        }
+
+        .description {
+            font-size: 1.2rem;
+            color: #a7a7a7;
+            max-width: 35rem;
+        }
+
+        /* --- Project Item List --- */
+        .project-list {
+            display: flex;
+            flex-direction: column;
+            gap: 2rem;
+        }
+
+        .project-item {
+            display: grid;
+            grid-template-columns: 80px 1fr auto;
+            align-items: center;
+            padding: 3rem 0;
+            border-top: 1px solid rgba(255, 255, 255, 0.1);
+            transition: 0.4s ease;
+            text-decoration: none;
+            color: inherit;
+        }
+
+        .project-item:hover {
+            background: rgba(255, 255, 255, 0.03);
+            padding-left: 1.5rem;
+            padding-right: 1.5rem;
+            border-top-color: #6600c5;
+        }
+
+        .item-num {
+            font-family: 'Verdana';
+            color: #5300a0;
+            font-weight: bold;
+            font-size: 1.2rem;
+        }
+
+        .item-title h2 {
+            font-size: 2.2rem;
+            margin-bottom: 0.5rem;
+        }
+
+        .item-title p {
+            color: #888;
+            max-width: 30rem;
+        }
+
+        .item-tags {
+            display: flex;
+            gap: 0.8rem;
+        }
+
+        .item-tags span {
+            font-size: 0.7rem;
+            padding: 0.3rem 0.8rem;
+            border-radius: 50px;
+            border: 1px solid #444;
+            text-transform: uppercase;
+            letter-spacing: 1px;
+        }
+
+        /* --- Responsive Logic --- */
+        @media (max-width: 850px) {
+            .project-item {
+                grid-template-columns: 1fr;
+                gap: 1.5rem;
+            }
+            .item-tags {
+                justify-content: flex-start;
+            }
+            header nav { display: none; } /* Simplicity for mobile */
+        }
+    </style>
 </head>
-<body class="projects-page">
+<body>
+
     <img class="image-gradient" src="{{ url_for('static', filename='gradient.png') }}" alt="gradient">
     <div class="layer-blur"></div>
 
@@ -16,7 +223,7 @@
             <nav>
                 <a href="/">HOME</a>
                 <a href="#" class="active">PROJECTS</a>
-                <a href="#">RESUME</a>
+                <a href="#">RESOURCES</a>
             </nav>
             <div class="auth-buttons">   
                 <a href="/"><button class="btn-logging">BACK HOME</button></a>
@@ -28,40 +235,52 @@
                 <div class="tag-box">
                     <div class="tag"><b>The Lab &wedbar;</b></div>
                 </div>
-                <h1 class="content">SELECTED<br>WORKS</h1>
-                <p class="description">A collection of tools and experiments built with Python, NumPy, and Machine Learning.</p>
+                <h1>SELECTED<br>WORKS</h1>
+                <p class="description">Exploring the intersection of Python, Machine Learning, and raw data transformations.</p>
             </div>
 
-            <div class="projects-stack">
-                <div class="project-item">
-                    <div class="item-info">
-                        <span class="num">01</span>
-                        <h3>AI MPG Predictor</h3>
-                        <p>A supervised learning model that estimates vehicle fuel efficiency. Built using linear regression to analyze the relationship between horsepower, weight, and displacement.</p>
-                        <div class="tech-tags">
-                            <span>Python</span>
-                            <span>NumPy</span>
-                            <span>Scikit-Learn</span>
-                        </div>
-                        <a href="/predict" class="btn-signing-main">View Project &gt;</a>
+            <div class="project-list">
+                
+                <a href="/predict" class="project-item">
+                    <div class="item-num">01</div>
+                    <div class="item-title">
+                        <h2>AI MPG Predictor</h2>
+                        <p>A supervised learning model predicting fuel efficiency based on vehicle specifications.</p>
                     </div>
-                </div>
+                    <div class="item-tags">
+                        <span>Python</span>
+                        <span>ML</span>
+                        <span>NumPy</span>
+                    </div>
+                </a>
 
-                <div class="project-item">
-                    <div class="item-info">
-                        <span class="num">02</span>
-                        <h3>LifePath AI</h3>
-                        <p>A global longevity simulator based on WHO datasets. It analyzes socio-economic and biological markers to predict life expectancy trends across different nations.</p>
-                        <div class="tech-tags">
-                            <span>Data Analysis</span>
-                            <span>Flask</span>
-                            <span>Matplotlib</span>
-                        </div>
-                        <a href="#" class="btn-signing-main">View Project &gt;</a>
+                <a href="#" class="project-item">
+                    <div class="item-num">02</div>
+                    <div class="item-title">
+                        <h2>Longevity Markers</h2>
+                        <p>Simulating global life expectancy using WHO datasets and socio-economic variables.</p>
                     </div>
-                </div>
+                    <div class="item-tags">
+                        <span>Analysis</span>
+                        <span>Flask</span>
+                    </div>
+                </a>
+
+                <a href="#" class="project-item">
+                    <div class="item-num">03</div>
+                    <div class="item-title">
+                        <h2>Data Sculptor</h2>
+                        <p>A library designed to clean and prepare NumPy arrays for neural network consumption.</p>
+                    </div>
+                    <div class="item-tags">
+                        <span>Library</span>
+                        <span>Tools</span>
+                    </div>
+                </a>
+
             </div>
         </main>
     </div>
+
 </body>
 </html>
