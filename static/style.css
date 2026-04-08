@@ -5,250 +5,192 @@
 }
 
 body {
-    font-family: system-ui, -apple-system, BlinkMacSystemFont, 'Segoe UI', Roboto, Oxygen, Ubuntu, Cantarell, 'Open Sans', 'Helvetica Neue', sans-serif;
+    font-family: system-ui, -apple-system, sans-serif;
     background-color: black;
     color: #e7e7e7;
     min-height: 100vh;
-    line-height: 1.5;
-    overflow-x: hidden; /* Prevents unwanted horizontal scrolling */
+    overflow-x: hidden; /* Crucial: stops the robot from creating a horizontal scrollbar */
 }
 
-/* Background Elements */
+/* --- Background & Effects --- */
 .image-gradient {
-    position: absolute;
+    position: fixed; /* Changed to fixed so it stays behind during scroll */
     top: 0;
     right: 0;
-    opacity: 0.5;
-    max-width: 100%; /* Ensures it doesn't break mobile width */
+    opacity: 0.4;
+    z-index: 0;
     pointer-events: none;
 }
 
 .layer-blur {
-    height: 0;
-    width: 30rem;
-    max-width: 80vw; /* Keeps blur within screen on small devices */
+    width: clamp(20rem, 50vw, 40rem);
+    height: 10px;
     position: absolute;
-    top: 20px;
+    top: 10%;
     right: 0;
-    box-shadow: 0 0 700px 15px white;
+    box-shadow: 0 0 500px 40px rgba(255, 255, 255, 0.2);
     rotate: -30deg;
     z-index: -1;
 }
 
-/* Layout Containers */
-.container { 
-    width: 100%;
-    position: relative;
-}
-
-/* Header & Nav */
+/* --- Header Section --- */
 header {
     display: flex;
     justify-content: space-between;
     align-items: center;
-    padding: 1rem 5%; /* Changed from fixed 5rem to percentage */
+    padding: 1.5rem 5%;
     position: relative;
     z-index: 1000;
 }
 
 header h1 {
-    font-family: 'verdana';
-    font-size: clamp(1.5rem, 5vw, 3rem); /* Dynamically scales font */
-    font-weight: 300;
+    font-size: clamp(1.5rem, 4vw, 2.5rem);
+    font-family: 'Verdana', sans-serif;
+    letter-spacing: -1px;
 }
 
 nav {
     display: flex;
-    align-items: center;
     gap: 2rem;
 }
 
 nav a {
-    font-size: 1rem;
-    letter-spacing: 0.1rem;
-    transition: color 0.2s ease;
     text-decoration: none;
-    color: inherit;
+    color: #a7a7a7;
+    font-size: 0.85rem;
+    font-weight: 600;
+    letter-spacing: 1px;
+    transition: 0.3s;
 }
 
-nav a:hover { color: #a7a7a7; }
+nav a:hover { color: white; }
 
-/* Buttons */
-.auth-buttons {
-    display: flex;
-    gap: 0.5rem;
-}
-
-.btn-signing, .btn-logging {
-    background-color: #a7a7a7;
-    color: black;
-    padding: 0.6rem 1.5rem; /* Adjusted for better fit */
-    border-radius: 50px;
-    border: none;
-    font-size: 0.9rem;
-    font-weight: 500;
-    transition: background-color 0.2s ease;
-    cursor: pointer;
-    white-space: nowrap;
-}
-
-.btn-signing:hover, .btn-logging:hover { background-color: white; }
-
-/* Main Content Section */
+/* --- Main Content Section --- */
 main {
+    position: relative;
+    padding: 0 5%;
+    min-height: 80vh;
     display: flex;
-    flex-direction: column;
-    justify-content: center;
-    min-height: calc(100vh - 100px);
-    padding: 2rem 5%;
+    align-items: center; /* Centers content vertically */
 }
 
 .content {
     max-width: 45rem;
-    width: 100%;
-    z-index: 10;
-}
-
-.para {
-    font-size: clamp(1rem, 2vw, 1.25rem);
-    margin-bottom: 2rem;
-}
-
-/* Tag Box */
-.tag-box {
     position: relative;
-    margin-bottom: 1.5rem;
-    width: 18rem;
-    max-width: 100%;
-    height: 2.5rem;
-    border-radius: 50px;
-    background: linear-gradient(to right, #656565, #7f42a7, #6600c5, #5300a0, #757575, #656565);
-    background-size: 200%;
-    animation: animationGradient 2.5s linear infinite;
-    box-shadow: 0 0 15px rgba(255, 255, 255, 0.3);
+    z-index: 10; /* Ensures text is always above the robot on overlap */
 }
 
-@keyframes animationGradient { to { background-position: 200%; } }
-
-.tag-box .tag { 
-    position: absolute;
-    inset: 3px;
-    background-color: black;
+.tag-box {
+    width: fit-content;
+    padding: 2px;
     border-radius: 50px;
-    display: flex;
-    align-items: center;
-    justify-content: center;
-    transition: 0.5s ease;
-    cursor: pointer;
+    background: linear-gradient(90deg, #656565, #7f42a7, #6600c5, #5300a0, #757575);
+    background-size: 200%;
+    animation: animationGradient 4s linear infinite;
+    margin-bottom: 1.5rem;
+}
+
+.tag-box .tag {
+    background: black;
+    padding: 0.5rem 1.5rem;
+    border-radius: 50px;
+    font-size: 0.9rem;
+    color: white;
 }
 
 .content h1 {
-    font-size: clamp(2.5rem, 8vw, 5rem); /* Responsive typography */
-    font-weight: 600;
-    letter-spacing: 0.1rem;
+    font-size: clamp(2.5rem, 7vw, 5.5rem);
     line-height: 1.1;
-    text-shadow: 0 0 10px purple;
-    margin: 1rem 0;
+    margin-bottom: 1.5rem;
+    text-transform: uppercase;
 }
 
-.description {
-    font-size: 1.2rem;
-    color: lightgrey;
-    margin: 1.5rem 0;
+.para {
+    color: #999;
+    font-size: 1.1rem;
+    line-height: 1.6;
+    margin-bottom: 2rem;
 }
 
 .buttons {
     display: flex;
     gap: 1rem;
-    flex-wrap: wrap; /* Buttons stack on very small screens */
 }
 
 .btn-get-started, .btn-signing-main {
-    text-decoration: none;
-    background-color: lightgrey;
-    color: black;
-    padding: 0.8rem 1.5rem;
+    padding: 0.8rem 2rem;
     border-radius: 50px;
-    font-size: 1rem;
+    text-decoration: none;
     font-weight: 600;
-    transition: all 0.2s ease;
+    transition: 0.3s;
 }
 
-.btn-get-started:hover, .btn-signing-main:hover {
-    background-color: white;
-    transform: translateY(-2px);
-}
+.btn-get-started { background: #333; color: white; border: 1px solid #444; }
+.btn-signing-main { background: white; color: black; }
 
-/* 3D Model Styling */
+/* --- 3D Element --- */
 .robot-3d {
     position: absolute;
     top: 50%;
-    right: -10%;
+    right: -5%;
     transform: translateY(-50%);
-    width: 50%;
-    height: 80%;
+    width: 600px;
+    height: 600px;
     z-index: 1;
-    pointer-events: none; /* Allows clicking text behind the model */
 }
 
-/* --- MEDIA QUERIES FOR RESPONSIVENESS --- */
+/* --- Media Queries --- */
 
-@media (max-width: 1024px) {
+@media (max-width: 1100px) {
     .robot-3d {
-        right: -20%;
-        width: 60%;
+        width: 450px;
+        height: 450px;
+        right: -10%;
     }
 }
 
-@media (max-width: 768px) {
+@media (max-width: 850px) {
     header {
         flex-direction: column;
         gap: 1.5rem;
-        padding: 2rem 5%;
+        text-align: center;
     }
-
-    nav {
-        gap: 1.5rem;
-    }
-
-    .robot-3d {
-        position: relative;
-        right: 0;
-        top: 0;
-        transform: none;
-        width: 100%;
-        height: 400px;
-        margin-top: -50px; /* Pulls model closer to text */
-    }
+    
+    nav { gap: 1rem; }
 
     main {
+        flex-direction: column;
         text-align: center;
-        align-items: center;
-        padding-top: 0;
+        padding-top: 4rem;
     }
 
     .content {
-        margin-left: 0;
+        max-width: 100%;
+        margin-bottom: 2rem;
     }
 
     .tag-box, .buttons {
+        justify-content: center;
         margin-left: auto;
         margin-right: auto;
-        justify-content: center;
+    }
+
+    .robot-3d {
+        position: relative; /* Moves robot below the text */
+        top: 0;
+        right: 0;
+        transform: none;
+        width: 100%;
+        height: 350px;
     }
 }
 
 @media (max-width: 480px) {
-    nav {
-        display: none; /* Hide nav links on tiny screens or replace with a burger menu icon */
-    }
-    
-    .content h1 {
-        font-size: 2.5rem;
-    }
-    
-    .auth-buttons {
-        width: 100%;
-        justify-content: center;
-    }
+    .auth-buttons { display: none; } /* Simplify header for mobile */
+    .content h1 { font-size: 3rem; }
+}
+
+@keyframes animationGradient { 
+    0% { background-position: 0% 50%; }
+    100% { background-position: 200% 50%; }
 }
