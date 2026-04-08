@@ -26,6 +26,10 @@ def registerbtn():
 def projects():
     return render_template('projects.html')
 
+@app.route('/resources')
+def projects():
+    return render_template('resources.html')
+
 @app.route('/register', methods=['POST', 'GET'])
 def register():
     if request.method == 'POST':
