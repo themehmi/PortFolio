@@ -1,0 +1,291 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Resources | Neym Portfolio</title>
+    <style>
+        * {
+            margin: 0;
+            padding: 0;
+            box-sizing: border-box;
+        }
+
+        body {
+            font-family: system-ui, -apple-system, sans-serif;
+            background-color: black;
+            color: #e7e7e7;
+            min-height: 100vh;
+            overflow-x: hidden;
+            line-height: 1.5;
+        }
+
+        /* --- Global Heritage Styles --- */
+        .image-gradient {
+            position: fixed;
+            top: 0;
+            right: 0;
+            opacity: 0.4;
+            z-index: -1;
+            pointer-events: none;
+        }
+
+        .layer-blur {
+            width: 30rem;
+            position: absolute;
+            top: 50px;
+            right: 0;
+            box-shadow: 0 0 700px 15px white;
+            rotate: -30deg;
+            z-index: -1;
+        }
+
+        .container { 
+            width: 100%;
+            padding: 0 5%;
+        }
+
+        header {
+            display: flex;
+            justify-content: space-between;
+            align-items: center;
+            padding: 1.5rem 0;
+            position: relative;
+            z-index: 1000;
+        }
+
+        header h1 {
+            font-family: 'Verdana';
+            font-size: 2.5rem;
+            font-weight: 300;
+        }
+
+        nav {
+            display: flex;
+            gap: 2rem;
+        }
+
+        nav a {
+            font-size: 0.9rem;
+            letter-spacing: 0.1rem;
+            text-decoration: none;
+            color: #a7a7a7;
+            transition: 0.3s;
+        }
+
+        nav a:hover { color: white; }
+
+        .btn-logging {
+            background-color: #a7a7a7;
+            color: black;
+            padding: 0.7rem 1.8rem;
+            border-radius: 50px;
+            border: none;
+            font-size: 0.9rem;
+            font-weight: 600;
+            cursor: pointer;
+            transition: 0.3s;
+        }
+
+        .btn-logging:hover { background-color: white; }
+
+        /* --- Resources Page Layout --- */
+        .resources-main {
+            padding: 4rem 0;
+            max-width: 1200px;
+            margin: 0 auto;
+        }
+
+        .resources-intro {
+            margin-bottom: 5rem;
+        }
+
+        .tag-box {
+            position: relative;
+            margin-bottom: 2rem;
+            width: 16rem; 
+            height: 3.2rem; 
+            border-radius: 50px;
+            background: linear-gradient(to right, #656565, #7f42a7,#6600c5,#5300a0,#757575,#656565);
+            background-size: 200%;
+            animation: animationGradient 2.5s linear infinite;
+        }
+
+        @keyframes animationGradient { to { background-position: 200%; } }
+
+        .tag-box .tag { 
+            position: absolute;
+            inset: 4px;
+            background-color: black;
+            border-radius: 50px;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            font-size: 1.1rem; 
+            font-weight: bold;
+            letter-spacing: 1px;
+        }
+
+        .resources-main h1 {
+            font-size: clamp(2rem, 5vw, 3.5rem); 
+            line-height: 1.1;
+            margin-bottom: 1.5rem;
+            text-shadow: 0 0 10px purple;
+            font-weight: 600;
+        }
+
+        .description {
+            font-size: 1.1rem;
+            color: #a7a7a7;
+            max-width: 35rem;
+        }
+
+        /* --- GitHub Repository List --- */
+        .resource-list {
+            display: flex;
+            flex-direction: column;
+            gap: 1.5rem;
+        }
+
+        .resource-item {
+            background: rgba(255, 255, 255, 0.03);
+            border: 1px solid rgba(255, 255, 255, 0.05);
+            border-radius: 20px;
+            padding: 2rem;
+            display: flex;
+            justify-content: space-between;
+            align-items: center;
+            transition: 0.4s;
+            text-decoration: none;
+            color: inherit;
+        }
+
+        .resource-item:hover {
+            border-color: #6600c5;
+            background: rgba(102, 0, 197, 0.05);
+            transform: scale(1.01);
+        }
+
+        .repo-info h2 {
+            font-size: 1.5rem;
+            margin-bottom: 0.5rem;
+            color: white;
+        }
+
+        .repo-info p {
+            color: #888;
+            font-size: 0.9rem;
+        }
+
+        .repo-meta {
+            display: flex;
+            align-items: center;
+            gap: 1.5rem;
+        }
+
+        .github-link {
+            background: white;
+            color: black;
+            width: 45px;
+            height: 45px;
+            border-radius: 50%;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            font-weight: bold;
+            font-size: 1.2rem;
+        }
+
+        /* --- Footer Style --- */
+        .resource-footer {
+            margin-top: 5rem;
+            padding-top: 3rem;
+            border-top: 1px solid rgba(255, 255, 255, 0.1);
+            text-align: center;
+            color: #555;
+            font-size: 0.8rem;
+        }
+
+        @media (max-width: 768px) {
+            .resource-item {
+                flex-direction: column;
+                align-items: flex-start;
+                gap: 1.5rem;
+            }
+            .repo-meta { width: 100%; justify-content: flex-end; }
+            header nav { display: none; }
+        }
+    </style>
+</head>
+<body>
+
+    <img class="image-gradient" src="{{ url_for('static', filename='gradient.png') }}" alt="gradient">
+    <div class="layer-blur"></div>
+
+    <div class="container">
+        <header>
+            <h1 class="logo"><b>Neym</b></h1>
+            <nav>
+                <a href="/">HOME</a>
+                <a href="/projects">PROJECTS</a>
+                <a href="#" style="color: white;">RESOURCES</a>
+            </nav>
+            <div class="auth-buttons">   
+                <a href="/"><button class="btn-logging">BACK HOME</button></a>
+            </div>
+        </header>
+
+        <main class="resources-main">
+            <div class="resources-intro">
+                <div class="tag-box">
+                    <div class="tag"><b>The Lab &wedbar;</b></div>
+                </div>
+                <h1>CODE REPOSITORIES</h1>
+                <p class="description">Direct access to my source code, documentation, and technical datasets on GitHub.</p>
+            </div>
+
+            <div class="resource-list">
+                
+                <a href="https://github.com/themehmi/Auto-MPG-Prediction-Using-KNN" target="_blank" class="resource-item">
+                    <div class="repo-info">
+                        <h2>Auto MPG Prediction</h2>
+                        <p>Complete source code for the KNN performance model.</p>
+                    </div>
+                    <div class="repo-meta">
+                        <span style="color: #6600c5; font-size: 0.8rem; font-weight: bold;">GITHUB REPO &gt;</span>
+                        <div class="github-link">Git</div>
+                    </div>
+                </a>
+
+                <a href="https://github.com/themehmi/Life-Expectancy-Predictor" target="_blank" class="resource-item">
+                    <div class="repo-info">
+                        <h2>Longevity Predictor</h2>
+                        <p>Flask backend and WHO data processing scripts.</p>
+                    </div>
+                    <div class="repo-meta">
+                        <span style="color: #6600c5; font-size: 0.8rem; font-weight: bold;">GITHUB REPO &gt;</span>
+                        <div class="github-link">Git</div>
+                    </div>
+                </a>
+
+                <a href="#" class="resource-item">
+                    <div class="repo-info">
+                        <h2>Data Sculptor Library</h2>
+                        <p>The core NumPy pre-processing utility scripts.</p>
+                    </div>
+                    <div class="repo-meta">
+                        <span style="color: #6600c5; font-size: 0.8rem; font-weight: bold;">GITHUB REPO &gt;</span>
+                        <div class="github-link">Git</div>
+                    </div>
+                </a>
+
+            </div>
+
+            <footer class="resource-footer">
+                NARINDER SINGH &copy; 2026 | OPEN SOURCE
+            </footer>
+        </main>
+    </div>
+
+</body>
+</html>
