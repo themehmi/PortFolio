@@ -1,41 +1,67 @@
-<nav>
-    <a href="#">RESUME</a>
-    <a href="#projects">PROJECTS</a> <a href="#">RESOURCES</a>
-    <a href="#">DOCS</a>
-</nav>
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Projects | Narinder Singh</title>
+    <link rel="stylesheet" href="{{ url_for('static', filename='project__style.css') }}">
+</head>
+<body class="projects-page">
+    <img class="image-gradient" src="{{ url_for('static', filename='gradient.png') }}" alt="gradient">
+    <div class="layer-blur"></div>
 
-<section id="projects" class="projects-container">
-    <div class="projects-header">
-        <div class="tag-box" style="width: 12rem; margin: 0 auto 1rem;">
-            <div class="tag"><b>Portfolio &wedbar;</b></div>
-        </div>
-        <h2 class="section-title">FEATURED PROJECTS</h2>
-    </div>
+    <div class="container">
+        <header>
+            <h1 class="logo"><b>Neym</b></h1>
+            <nav>
+                <a href="/">HOME</a>
+                <a href="#" class="active">PROJECTS</a>
+                <a href="#">RESUME</a>
+            </nav>
+            <div class="auth-buttons">   
+                <a href="/"><button class="btn-logging">BACK HOME</button></a>
+            </div>
+        </header>
 
-    <div class="projects-grid">
-        <div class="project-card">
-            <div class="card-glow"></div>
-            <div class="card-content">
-                <span class="tech-stack">Python • ML • NumPy</span>
-                <h3>AI MPG Predictor</h3>
-                <p>A machine learning tool that predicts vehicle fuel efficiency using regression analysis.</p>
-                <div class="card-buttons">
-                    <a href="#" class="btn-card">Live Demo</a>
-                    <a href="#" class="btn-card outline">GitHub</a>
+        <main class="projects-main">
+            <div class="projects-intro">
+                <div class="tag-box">
+                    <div class="tag"><b>The Lab &wedbar;</b></div>
+                </div>
+                <h1 class="content">SELECTED<br>WORKS</h1>
+                <p class="description">A collection of tools and experiments built with Python, NumPy, and Machine Learning.</p>
+            </div>
+
+            <div class="projects-stack">
+                <div class="project-item">
+                    <div class="item-info">
+                        <span class="num">01</span>
+                        <h3>AI MPG Predictor</h3>
+                        <p>A supervised learning model that estimates vehicle fuel efficiency. Built using linear regression to analyze the relationship between horsepower, weight, and displacement.</p>
+                        <div class="tech-tags">
+                            <span>Python</span>
+                            <span>NumPy</span>
+                            <span>Scikit-Learn</span>
+                        </div>
+                        <a href="/predict" class="btn-signing-main">View Project &gt;</a>
+                    </div>
+                </div>
+
+                <div class="project-item">
+                    <div class="item-info">
+                        <span class="num">02</span>
+                        <h3>LifePath AI</h3>
+                        <p>A global longevity simulator based on WHO datasets. It analyzes socio-economic and biological markers to predict life expectancy trends across different nations.</p>
+                        <div class="tech-tags">
+                            <span>Data Analysis</span>
+                            <span>Flask</span>
+                            <span>Matplotlib</span>
+                        </div>
+                        <a href="#" class="btn-signing-main">View Project &gt;</a>
+                    </div>
                 </div>
             </div>
-        </div>
-
-        <div class="project-card">
-            <div class="card-glow"></div>
-            <div class="card-content">
-                <span class="tech-stack">Python • Data Visualization</span>
-                <h3>Data Transformer</h3>
-                <p>Converting raw NumPy datasets into meaningful visual insights and automated reports.</p>
-                <div class="card-buttons">
-                    <a href="#" class="btn-card">Coming Soon</a>
-                </div>
-            </div>
-        </div>
+        </main>
     </div>
-</section>
+</body>
+</html>
