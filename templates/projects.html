@@ -20,7 +20,7 @@
             line-height: 1.5;
         }
 
-        /* --- Global Heritage Styles (from your Home Page) --- */
+        /* --- Global Heritage Styles --- */
         .image-gradient {
             position: fixed;
             top: 0;
@@ -74,9 +74,7 @@
             transition: 0.3s;
         }
 
-        nav a:hover, nav a.active {
-            color: white;
-        }
+        nav a:hover { color: white; }
 
         .btn-logging {
             background-color: #a7a7a7;
@@ -90,9 +88,7 @@
             transition: 0.3s;
         }
 
-        .btn-logging:hover {
-            background-color: white;
-        }
+        .btn-logging:hover { background-color: white; }
 
         /* --- Projects Page Layout --- */
         .projects-main {
@@ -105,11 +101,12 @@
             margin-bottom: 6rem;
         }
 
+        /* Increased size of "The Lab" */
         .tag-box {
             position: relative;
-            margin-bottom: 1.5rem;
-            width: 12rem;
-            height: 2.4rem;
+            margin-bottom: 2rem;
+            width: 16rem; /* Increased width */
+            height: 3.2rem; /* Increased height */
             border-radius: 50px;
             background: linear-gradient(to right, #656565, #7f42a7,#6600c5,#5300a0,#757575,#656565);
             background-size: 200%;
@@ -120,25 +117,28 @@
 
         .tag-box .tag { 
             position: absolute;
-            inset: 3px;
+            inset: 4px;
             background-color: black;
             border-radius: 50px;
             display: flex;
             align-items: center;
             justify-content: center;
-            font-size: 0.85rem;
+            font-size: 1.1rem; /* Increased font size */
             font-weight: bold;
+            letter-spacing: 1px;
         }
 
+        /* Decreased size of "Selected Works" */
         .projects-main h1 {
-            font-size: clamp(3rem, 8vw, 6rem);
-            line-height: 1;
+            font-size: clamp(2rem, 5vw, 3.5rem); /* Scaled down */
+            line-height: 1.1;
             margin-bottom: 1.5rem;
-            text-shadow: 0 0 15px purple;
+            text-shadow: 0 0 10px purple;
+            font-weight: 600;
         }
 
         .description {
-            font-size: 1.2rem;
+            font-size: 1.1rem;
             color: #a7a7a7;
             max-width: 35rem;
         }
@@ -147,24 +147,23 @@
         .project-list {
             display: flex;
             flex-direction: column;
-            gap: 2rem;
         }
 
         .project-item {
             display: grid;
             grid-template-columns: 80px 1fr auto;
             align-items: center;
-            padding: 3rem 0;
+            padding: 2.5rem 0;
             border-top: 1px solid rgba(255, 255, 255, 0.1);
-            transition: 0.4s ease;
+            transition: 0.4s cubic-bezier(0.22, 1, 0.36, 1);
             text-decoration: none;
             color: inherit;
         }
 
         .project-item:hover {
             background: rgba(255, 255, 255, 0.03);
-            padding-left: 1.5rem;
-            padding-right: 1.5rem;
+            padding-left: 2rem;
+            padding-right: 2rem;
             border-top-color: #6600c5;
         }
 
@@ -172,17 +171,18 @@
             font-family: 'Verdana';
             color: #5300a0;
             font-weight: bold;
-            font-size: 1.2rem;
+            font-size: 1.1rem;
         }
 
         .item-title h2 {
-            font-size: 2.2rem;
-            margin-bottom: 0.5rem;
+            font-size: 1.8rem;
+            margin-bottom: 0.4rem;
         }
 
         .item-title p {
             color: #888;
-            max-width: 30rem;
+            font-size: 0.95rem;
+            max-width: 32rem;
         }
 
         .item-tags {
@@ -197,18 +197,16 @@
             border: 1px solid #444;
             text-transform: uppercase;
             letter-spacing: 1px;
+            background: rgba(255, 255, 255, 0.05);
         }
 
-        /* --- Responsive Logic --- */
         @media (max-width: 850px) {
             .project-item {
                 grid-template-columns: 1fr;
-                gap: 1.5rem;
+                gap: 1.2rem;
             }
-            .item-tags {
-                justify-content: flex-start;
-            }
-            header nav { display: none; } /* Simplicity for mobile */
+            .item-tags { justify-content: flex-start; }
+            header nav { display: none; }
         }
     </style>
 </head>
@@ -222,7 +220,7 @@
             <h1 class="logo"><b>Neym</b></h1>
             <nav>
                 <a href="/">HOME</a>
-                <a href="#" class="active">PROJECTS</a>
+                <a href="#" style="color: white;">PROJECTS</a>
                 <a href="#">RESOURCES</a>
             </nav>
             <div class="auth-buttons">   
@@ -235,22 +233,22 @@
                 <div class="tag-box">
                     <div class="tag"><b>The Lab &wedbar;</b></div>
                 </div>
-                <h1>SELECTED<br>WORKS</h1>
-                <p class="description">Exploring the intersection of Python, Machine Learning, and raw data transformations.</p>
+                <h1>SELECTED WORKS</h1>
+                <p class="description">A detailed look into my technical experiments with K-Nearest Neighbors, NumPy, and regression analysis.</p>
             </div>
 
             <div class="project-list">
                 
-                <a href="/predict" class="project-item">
+                <a href="https://auto-mpg-prediction-using-knn.vercel.app/" target="_blank" class="project-item">
                     <div class="item-num">01</div>
                     <div class="item-title">
-                        <h2>AI MPG Predictor</h2>
-                        <p>A supervised learning model predicting fuel efficiency based on vehicle specifications.</p>
+                        <h2>Auto MPG Prediction</h2>
+                        <p>Leveraging the K-Nearest Neighbors (KNN) algorithm to predict vehicle fuel efficiency with high precision.</p>
                     </div>
                     <div class="item-tags">
-                        <span>Python</span>
+                        <span>KNN</span>
                         <span>ML</span>
-                        <span>NumPy</span>
+                        <span>Vercel</span>
                     </div>
                 </a>
 
@@ -261,7 +259,7 @@
                         <p>Simulating global life expectancy using WHO datasets and socio-economic variables.</p>
                     </div>
                     <div class="item-tags">
-                        <span>Analysis</span>
+                        <span>Python</span>
                         <span>Flask</span>
                     </div>
                 </a>
@@ -270,10 +268,10 @@
                     <div class="item-num">03</div>
                     <div class="item-title">
                         <h2>Data Sculptor</h2>
-                        <p>A library designed to clean and prepare NumPy arrays for neural network consumption.</p>
+                        <p>A specialized library designed to clean and prepare NumPy arrays for neural network consumption.</p>
                     </div>
                     <div class="item-tags">
-                        <span>Library</span>
+                        <span>NumPy</span>
                         <span>Tools</span>
                     </div>
                 </a>
