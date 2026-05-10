@@ -231,7 +231,7 @@ main{
 .robot-3d{
     position: absolute;
     top: 0;
-    right: -20%;
+    right: -10%;
 }
 
 /* This handles everything for screens narrower than 768px (Phones/Tablets) */
