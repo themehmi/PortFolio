@@ -239,4 +239,81 @@ main{
     .robot-3d {
         display: none !important;
     }
+
+    header {
+        padding: 1rem 1.5rem; 
+        flex-direction: column;
+        gap: 1.5rem;
+        height: auto;
+    }
+
+    header h1 {
+        font-size: 2rem; /* Smaller logo for mobile */
+    }
+
+    nav {
+        margin-left: 0; 
+        gap: 1rem;
+        flex-wrap: wrap; 
+        justify-content: center;
+        width: 100%;
+    }
+
+    nav a {
+        font-size: 0.9rem;
+        letter-spacing: 0.05rem;
+    }
+
+    main {
+        padding-top: 2rem;
+        justify-content: flex-start; 
+        min-height: auto;
+    }
+
+    .content {
+        margin-left: 0; 
+        max-width: 100%;
+        text-align: center;
+        display: flex;
+        flex-direction: column;
+        align-items: center;
+        padding: 0 1rem;
+    }
+
+    .tag-box {
+        width: 16rem; 
+        margin-bottom: 1.5rem;
+    }
+
+    .content h1 {
+        font-size: 2.2rem; 
+        margin-top: 1rem;
+    }
+
+    .para {
+        font-size: 1rem;
+        line-height: 1.4;
+    }
+
+    .description {
+        font-size: 1rem;
+        max-width: 100%;
+    }
+
+    .buttons {
+        justify-content: center;
+        width: 100%;
+        gap: 0.8rem;
+    }
+
+    .btn-get-started, .btn-signing-main {
+        font-size: 0.9rem;
+        padding: 0.6rem 1rem;
+    }
+    .layer-blur {
+        width: 15rem;
+        top: 10%;
+        right: 10%;
+        box-shadow: 0 0 300px 10px white; /* Smaller glow to avoid white-out */
+    }
 }
