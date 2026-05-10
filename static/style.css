@@ -233,3 +233,10 @@ main{
     top: 0;
     right: -20%;
 }
+
+/* This hides the robot on any screen narrower than 768px (tablets and phones) */
+@media (max-width: 768px) {
+    .robot-3d {
+        display: none !important;
+    }
+}
