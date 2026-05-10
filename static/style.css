@@ -236,24 +236,24 @@ main{
 
 /* This handles everything for screens narrower than 768px (Phones/Tablets) */
 @media (max-width: 768px) {
-    /* 1. DO NOT HIDE: Place robot in the background */
     .robot-3d {
-        display: block !important; /* Ensures it stays visible */
+        display: block !important;
         position: fixed;
         top: 0;
         left: 50%;
-        transform: translateX(-50%); /* Centers the robot behind text */
-        width: 150%; /* Make it large enough to cover the background */
+        transform: translateX(-50%);
+        width: 150%; 
         height: 100vh;
-        z-index: -1; /* Pushes it behind all text and buttons */
-        opacity: 0.40; /* Dims the robot for readability */
-        pointer-events: none; /* CRITICAL: Allows user to click buttons through the robot */
+        z-index: -1; 
+        opacity: 0.34;
+        pointer-events: none;
         
-        /* Hides the square box boundaries */
+        
         mask-image: radial-gradient(circle, black 30%, transparent 70%);
         -webkit-mask-image: radial-gradient(circle, black 30%, transparent 70%);
     }
 
+    
     header {
         flex-direction: column;
         padding: 2rem 1rem;
@@ -270,26 +270,9 @@ main{
     }
 
     .auth-buttons {
-        display: flex;
         justify-content: center;
-        gap: 0.5rem; /* Reduced gap for smaller screens */
-        width: 100%;
+        width: 50%;
     }
-
-    .btn-signing, .btn-logging {
-        /* Reduced padding and font size for a more compact look */
-        padding: 0.5rem 1.2rem; 
-        font-size: 0.85rem;
-        border-radius: 30px; /* Slightly tighter corner radius */
-        min-width: 90px; /* Optional: ensures buttons are consistent size */
-        white-space: nowrap; /* Prevents text from breaking into two lines */
-    }
-    
-    /* If you have a container wrapping the individual buttons */
-    .auth-buttons a {
-        text-decoration: none;
-    }
-}
 
     main {
         justify-content: center;
@@ -304,7 +287,7 @@ main{
         flex-direction: column;
         align-items: center;
         text-align: center;
-        z-index: 10; 
+        z-index: 10; /* Ensures text stays above the robot */
     }
 
     .tag-box {
@@ -313,7 +296,7 @@ main{
 
     .content h1 {
         font-size: 2.2rem;
-        text-shadow: 0 0 15px black; 
+        text-shadow: 0 0 15px black; /* Helps text pop over the robot */
     }
 
     .para {
@@ -329,6 +312,6 @@ main{
     .layer-blur {
         width: 100%;
         box-shadow: 0 0 300px 5px rgba(255, 255, 255, 0.1);
-        z-index: -2; /* Behind the robot */
+        z-index: -2; 
     }
 }
