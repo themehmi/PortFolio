@@ -236,103 +236,82 @@ main{
 
 /* This handles everything for screens narrower than 768px (Phones/Tablets) */
 @media (max-width: 768px) {
-
+    /* 1. DO NOT HIDE: Place robot in the background */
     .robot-3d {
-        display: none !important;
+        display: block !important; /* Ensures it stays visible */
+        position: fixed;
+        top: 0;
+        left: 50%;
+        transform: translateX(-50%); /* Centers the robot behind text */
+        width: 150%; /* Make it large enough to cover the background */
+        height: 100vh;
+        z-index: -1; /* Pushes it behind all text and buttons */
+        opacity: 0.25; /* Dims the robot for readability */
+        pointer-events: none; /* CRITICAL: Allows user to click buttons through the robot */
+        
+        /* Hides the square box boundaries */
+        mask-image: radial-gradient(circle, black 30%, transparent 70%);
+        -webkit-mask-image: radial-gradient(circle, black 30%, transparent 70%);
     }
-
-    .container {
-        padding: 0 1rem;
-        overflow-y: auto; 
-    }
-
 
     header {
-        flex-direction: column; 
+        flex-direction: column;
         padding: 2rem 1rem;
-        height: auto;
         gap: 1.5rem;
         text-align: center;
+        height: auto;
     }
 
-    header h1 {
-        font-size: 2.5rem; 
-    }
-
-   
     nav {
         margin-left: 0;
         justify-content: center;
-        flex-wrap: wrap; 
+        flex-wrap: wrap; /* Prevents hyperlink overlap */
         gap: 1.2rem;
-        width: 100%;
     }
 
-    nav a {
-        font-size: 0.9rem;
-    }
-
-    
     .auth-buttons {
-        display: flex;
         justify-content: center;
         width: 100%;
-        gap: 0.5rem;
     }
 
-    .btn-signing, .btn-logging {
-        padding: 0.6rem 1.2rem;
-        font-size: 0.9rem;
-    }
-
-    
     main {
-        justify-content: flex-start; 
+        justify-content: center;
         min-height: auto;
-        padding-bottom: 3rem;
+        padding-top: 1rem;
     }
 
     .content {
-        margin-left: 0; 
+        margin-left: 0;
         max-width: 100%;
         display: flex;
         flex-direction: column;
-        align-items: center; 
+        align-items: center;
         text-align: center;
+        z-index: 10; 
     }
 
     .tag-box {
-        margin: 0 auto 1.5rem auto; 
-        width: 16rem;
+        margin: 0 auto 1.5rem auto;
     }
 
     .content h1 {
         font-size: 2.2rem;
-        margin: 1.5rem 0;
-        text-align: center;
+        text-shadow: 0 0 15px black; 
     }
 
     .para {
         font-size: 1rem;
-        padding: 0 5%;
-    }
-
-    .description {
-        margin: 1rem auto;
-        max-width: 90%;
+        padding: 0 10%;
     }
 
     .buttons {
         justify-content: center;
-        width: 100%;
-        margin-top: 1rem;
+        gap: 1rem;
     }
 
     .layer-blur {
         width: 100%;
-        top: 0;
-        right: 0;
-        box-shadow: 0 0 200px 5px rgba(255, 255, 255, 0.2);
-        rotate: 0deg;
+        box-shadow: 0 0 300px 5px rgba(255, 255, 255, 0.1);
+        z-index: -2; /* Behind the robot */
     }
 }
