@@ -234,86 +234,105 @@ main{
     right: -20%;
 }
 
-/* This hides the robot on any screen narrower than 768px (tablets and phones) */
+/* This handles everything for screens narrower than 768px (Phones/Tablets) */
 @media (max-width: 768px) {
+
     .robot-3d {
         display: none !important;
     }
 
+    .container {
+        padding: 0 1rem;
+        overflow-y: auto; 
+    }
+
+
     header {
-        padding: 1rem 1.5rem; 
-        flex-direction: column;
-        gap: 1.5rem;
+        flex-direction: column; 
+        padding: 2rem 1rem;
         height: auto;
+        gap: 1.5rem;
+        text-align: center;
     }
 
     header h1 {
-        font-size: 2rem; /* Smaller logo for mobile */
+        font-size: 2.5rem; 
     }
 
+   
     nav {
-        margin-left: 0; 
-        gap: 1rem;
-        flex-wrap: wrap; 
+        margin-left: 0;
         justify-content: center;
+        flex-wrap: wrap; 
+        gap: 1.2rem;
         width: 100%;
     }
 
     nav a {
         font-size: 0.9rem;
-        letter-spacing: 0.05rem;
     }
 
+    
+    .auth-buttons {
+        display: flex;
+        justify-content: center;
+        width: 100%;
+        gap: 0.5rem;
+    }
+
+    .btn-signing, .btn-logging {
+        padding: 0.6rem 1.2rem;
+        font-size: 0.9rem;
+    }
+
+    
     main {
-        padding-top: 2rem;
         justify-content: flex-start; 
         min-height: auto;
+        padding-bottom: 3rem;
     }
 
     .content {
         margin-left: 0; 
         max-width: 100%;
-        text-align: center;
         display: flex;
         flex-direction: column;
-        align-items: center;
-        padding: 0 1rem;
+        align-items: center; 
+        text-align: center;
     }
 
     .tag-box {
-        width: 16rem; 
-        margin-bottom: 1.5rem;
+        margin: 0 auto 1.5rem auto; 
+        width: 16rem;
     }
 
     .content h1 {
-        font-size: 2.2rem; 
-        margin-top: 1rem;
+        font-size: 2.2rem;
+        margin: 1.5rem 0;
+        text-align: center;
     }
 
     .para {
         font-size: 1rem;
-        line-height: 1.4;
+        padding: 0 5%;
     }
 
     .description {
-        font-size: 1rem;
-        max-width: 100%;
+        margin: 1rem auto;
+        max-width: 90%;
     }
 
     .buttons {
         justify-content: center;
         width: 100%;
-        gap: 0.8rem;
+        margin-top: 1rem;
     }
 
-    .btn-get-started, .btn-signing-main {
-        font-size: 0.9rem;
-        padding: 0.6rem 1rem;
-    }
     .layer-blur {
-        width: 15rem;
-        top: 10%;
-        right: 10%;
-        box-shadow: 0 0 300px 10px white; /* Smaller glow to avoid white-out */
+        width: 100%;
+        top: 0;
+        right: 0;
+        box-shadow: 0 0 200px 5px rgba(255, 255, 255, 0.2);
+        rotate: 0deg;
     }
 }
