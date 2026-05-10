@@ -231,87 +231,107 @@ main{
 .robot-3d{
     position: absolute;
     top: 0;
-    right: -10%;
+    right: -20%;
 }
 
 /* This handles everything for screens narrower than 768px (Phones/Tablets) */
 @media (max-width: 768px) {
+    
+    /* 1. Hide the robot scene */
     .robot-3d {
-        display: block !important;
-        position: fixed;
-        top: 0;
-        left: 50%;
-        transform: translateX(-50%);
-        width: 150%; 
-        height: 100vh;
-        z-index: -1; 
-        opacity: 0.34;
-        pointer-events: none;
-        
-        
-        mask-image: radial-gradient(circle, black 30%, transparent 70%);
-        -webkit-mask-image: radial-gradient(circle, black 30%, transparent 70%);
+        display: none !important;
     }
 
-    
+    /* 2. Reset the container to allow centering */
+    .container {
+        padding: 0 1rem;
+        overflow-y: auto; /* Allow scrolling if content is long on small phones */
+    }
+
+    /* 3. Center the Header elements */
     header {
-        flex-direction: column;
+        flex-direction: column; /* Stack Logo -> Nav -> Auth */
         padding: 2rem 1rem;
+        height: auto;
         gap: 1.5rem;
         text-align: center;
-        height: auto;
+    }
+
+    header h1 {
+        font-size: 2.5rem; /* Slightly smaller logo */
     }
 
     nav {
-        margin-left: 0;
+        margin-left: 0; /* Remove the desktop offset */
         justify-content: center;
-        flex-wrap: wrap; /* Prevents hyperlink overlap */
+        flex-wrap: wrap; /* Wrap links if they are too wide */
         gap: 1.2rem;
+        width: 100%;
+    }
+
+    nav a {
+        font-size: 0.9rem;
     }
 
     .auth-buttons {
+        display: flex;
         justify-content: center;
-        width: 50%;
+        width: 100%;
+        gap: 0.5rem;
+    }
+
+    .btn-signing, .btn-logging {
+        padding: 0.6rem 1.2rem;
+        font-size: 0.9rem;
     }
 
     main {
-        justify-content: center;
+        justify-content: flex-start; 
         min-height: auto;
-        padding-top: 1rem;
+        padding-bottom: 3rem;
     }
 
     .content {
-        margin-left: 0;
+        margin-left: 0; /* Center the box */
         max-width: 100%;
         display: flex;
         flex-direction: column;
-        align-items: center;
+        align-items: center; /* Center all items inside the box */
         text-align: center;
-        z-index: 10; /* Ensures text stays above the robot */
     }
 
     .tag-box {
-        margin: 0 auto 1.5rem auto;
+        margin: 0 auto 1.5rem auto; /* Horizontal center */
+        width: 16rem;
     }
 
     .content h1 {
         font-size: 2.2rem;
-        text-shadow: 0 0 15px black; /* Helps text pop over the robot */
+        margin: 1.5rem 0;
+        text-align: center;
     }
 
     .para {
         font-size: 1rem;
-        padding: 0 10%;
+        padding: 0 5%;
+    }
+
+    .description {
+        margin: 1rem auto;
+        max-width: 90%;
     }
 
     .buttons {
         justify-content: center;
-        gap: 1rem;
+        width: 100%;
+        margin-top: 1rem;
     }
 
     .layer-blur {
         width: 100%;
-        box-shadow: 0 0 300px 5px rgba(255, 255, 255, 0.1);
-        z-index: -2; 
+        top: 0;
+        right: 0;
+        box-shadow: 0 0 200px 5px rgba(255, 255, 255, 0.2);
+        rotate: 0deg;
     }
 }
