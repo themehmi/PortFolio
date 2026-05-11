@@ -8,7 +8,8 @@ body {
     font-family: system-ui, -apple-system, BlinkMacSystemFont, 'Segoe UI', Roboto, Oxygen, Ubuntu, Cantarell, 'Open Sans', 'Helvetica Neue', sans-serif;
     background-color: black;
     color: #e7e7e7;
-    min-height: 100vh;
+    height: 100vh;
+    overflow: hidden;
     line-height: 1.5;
 }
 .image-gradient{
@@ -72,53 +73,27 @@ nav a:hover{
 }
 
 .auth-buttons {
-    background-color: #a7a7a7;
-    color:black;
-    padding: 0.8rem 2rem;
-    border-radius: 50px;
-    border: none;
-    font-size: 1rem;
-    font-weight: 500;
-    transition: background-color 0.2s ease;
-    cursor: pointer;
+    display: flex;
+    gap: 1rem;
+    align-items: center;
     z-index: 999;
 }
-.auth:hover{
-    background-color: white;
-}
 
-.btn-signing {
+.btn-signing, .btn-logging {
+    text-decoration: none;
     background-color: #a7a7a7;
-    color:black;
-    padding: 0.8rem 2rem;
+    color: black;
+    padding: 0.6rem 1.5rem;
     border-radius: 50px;
-    border: none;
-    font-size: 1rem;
-    font-weight: 500;
-    transition: background-color 0.2s ease;
-    cursor: pointer;
+    font-size: 0.95rem;
+    font-weight: 600;
+    transition: background-color 0.2s ease, transform 0.2s ease;
     z-index: 950;
 }
 
-.btn-signing:hover{
+.btn-signing:hover, .btn-logging:hover {
     background-color: white;
-}
-
-.btn-logging {
-    background-color: #a7a7a7;
-    color:black;
-    padding: 0.8rem 2rem;
-    border-radius: 50px;
-    border: none;
-    font-size: 1rem;
-    font-weight: 500;
-    transition: background-color 0.2s ease;
-    cursor: pointer;
-    z-index: 950;
-}
-
-.btn-logging:hover{
-    background-color: white;
+    transform: translateY(-2px);
 }
 
 main{
@@ -231,107 +206,72 @@ main{
 .robot-3d{
     position: absolute;
     top: 0;
-    right: -20%;
+    right: 0;
+    width: 50vw;
+    height: 100vh;
+    z-index: 1;
+    -webkit-mask-image: linear-gradient(to right, transparent 0%, black 15%);
+    mask-image: linear-gradient(to right, transparent 0%, black 15%);
 }
 
-/* This handles everything for screens narrower than 768px (Phones/Tablets) */
-@media (max-width: 768px) {
-    
-    /* 1. Hide the robot scene */
-    .robot-3d {
-        display: none !important;
-    }
-
-    /* 2. Reset the container to allow centering */
-    .container {
-        padding: 0 1rem;
-        overflow-y: auto; /* Allow scrolling if content is long on small phones */
-    }
-
-    /* 3. Center the Header elements */
-    header {
-        flex-direction: column; /* Stack Logo -> Nav -> Auth */
-        padding: 2rem 1rem;
-        height: auto;
-        gap: 1.5rem;
-        text-align: center;
-    }
-
-    header h1 {
-        font-size: 2.5rem; /* Slightly smaller logo */
-    }
-
-    nav {
-        margin-left: 0; /* Remove the desktop offset */
-        justify-content: center;
-        flex-wrap: wrap; /* Wrap links if they are too wide */
-        gap: 1.2rem;
-        width: 100%;
-    }
-
-    nav a {
-        font-size: 0.9rem;
-    }
-
-    .auth-buttons {
-        display: flex;
-        justify-content: center;
-        width: 100%;
-        gap: 0.5rem;
-    }
-
-    .btn-signing, .btn-logging {
-        padding: 0.6rem 1.2rem;
-        font-size: 0.9rem;
-    }
-
-    main {
-        justify-content: flex-start; 
-        min-height: auto;
-        padding-bottom: 3rem;
-    }
-
+/* Tablet responsiveness */
+@media (max-width: 1024px) {
     .content {
-        margin-left: 0; /* Center the box */
-        max-width: 100%;
-        display: flex;
+        max-width: 50%;
+        margin-left: 5%;
+    }
+    .robot-3d {
+        width: 45vw;
+    }
+    nav {
+        gap: 1.5rem;
+    }
+    header {
+        padding: 1rem 2rem;
+    }
+}
+
+/* Mobile responsiveness */
+@media (max-width: 768px) {
+    body {
+        height: auto;
+        overflow-y: auto;
+        overflow-x: hidden;
+    }
+    header {
         flex-direction: column;
-        align-items: center; /* Center all items inside the box */
+        gap: 1.5rem;
+        padding: 1.5rem;
+    }
+    nav {
+        margin-left: 0;
+        flex-wrap: wrap;
+        justify-content: center;
+    }
+    main {
+        min-height: auto;
+        padding: 2rem 0;
+    }
+    .content {
+        max-width: 90%;
+        margin: 0 auto;
         text-align: center;
     }
-
-    .tag-box {
-        margin: 0 auto 1.5rem auto; /* Horizontal center */
-        width: 16rem;
-    }
-
     .content h1 {
         font-size: 2.2rem;
-        margin: 1.5rem 0;
-        text-align: center;
     }
-
-    .para {
-        font-size: 1rem;
-        padding: 0 5%;
+    .tag-box {
+        margin: 0 auto 1.5rem auto;
     }
-
-    .description {
-        margin: 1rem auto;
-        max-width: 90%;
-    }
-
     .buttons {
         justify-content: center;
-        width: 100%;
-        margin-top: 1rem;
     }
-
-    .layer-blur {
-        width: 100%;
-        top: 0;
-        right: 0;
-        box-shadow: 0 0 200px 5px rgba(255, 255, 255, 0.2);
-        rotate: 0deg;
+    .robot-3d {
+        position: relative;
+        width: 100vw;
+        height: 60vh;
+        display: block !important;
+        -webkit-mask-image: linear-gradient(to bottom, transparent 0%, black 15%, black 85%, transparent 100%);
+        mask-image: linear-gradient(to bottom, transparent 0%, black 15%, black 85%, transparent 100%);
     }
 }
