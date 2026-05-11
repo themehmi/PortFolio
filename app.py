@@ -1,3 +1,4 @@
+# pyrefly: ignore [missing-import]
 from flask import Flask, render_template, request, redirect, url_for, flash
 import sqlite3
 
@@ -17,7 +18,7 @@ def init_db():
 
 init_db()
 
-# --- Page Routes ---
+# Page Routes
 
 @app.route('/')
 def home():
@@ -39,7 +40,7 @@ def registerbtn():
 def loginbtn():
     return render_template('login.html')
 
-# --- Logic Routes ---
+# Logic Routes
 
 @app.route('/register', methods=['GET', 'POST'])
 def register():
