@@ -116,6 +116,7 @@
         padding-top: 0%;
         padding-bottom: 0%;
         font-size: large;
+        margin-right: 10vh;
     }
 
     .tag-box {
@@ -339,8 +340,8 @@
 
         .spline-wrapper {
             position: relative;
-            width: 100vw;
-            height: 60vh;
+            display: none !important;
+
         }
 
         .robot-3d {
