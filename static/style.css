@@ -348,6 +348,7 @@
             flex-direction: column;
             gap: 1.5rem;
             padding: 1.5rem;
+            margin-left: -60px;
         }
 
         nav {
@@ -364,11 +365,13 @@
         .content {
             max-width: 90%;
             margin: 0 auto;
-            text-align: center;
+            text-align: left;
         }
 
         .content h1 {
             font-size: 2.2rem;
+            margin-left: auto;
+            margin-right: auto;
         }
 
         .tag-box {
