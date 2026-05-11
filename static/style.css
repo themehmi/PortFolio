@@ -210,8 +210,10 @@ main{
     width: 50vw;
     height: 100vh;
     z-index: 1;
-    -webkit-mask-image: linear-gradient(to right, transparent 0%, black 15%);
-    mask-image: linear-gradient(to right, transparent 0%, black 15%);
+    -webkit-mask-image: linear-gradient(to right, transparent 0%, black 15%), linear-gradient(to top, transparent 0%, black 15%);
+    -webkit-mask-composite: source-in;
+    mask-image: linear-gradient(to right, transparent 0%, black 15%), linear-gradient(to top, transparent 0%, black 15%);
+    mask-composite: intersect;
 }
 
 /* Tablet responsiveness */
