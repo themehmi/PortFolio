@@ -1,27 +1,28 @@
 # pyrefly: ignore [missing-import]
-from flask import Flask, render_template, request, redirect, url_for, flash
-import sqlite3
+from flask import Flask, render_template, request, redirect, url_for, flash, session
+from pymongo import MongoClient
+import os
+from dotenv import load_dotenv
+from datetime import timedelta
+
+load_dotenv()
 
 app = Flask(__name__, static_folder='static')
 app.secret_key = "neym_secret_key" # Required for flashing messages
+app.permanent_session_lifetime = timedelta(days=30) # Remember users for 30 days
 
-def init_db():
-    conn = sqlite3.connect('developers.db')
-    c = conn.cursor()
-    c.execute('''CREATE TABLE IF NOT EXISTS developers
-                 (id INTEGER PRIMARY KEY AUTOINCREMENT,
-                  username TEXT NOT NULL,
-                  email TEXT NOT NULL,
-                  password TEXT NOT NULL)''')
-    conn.commit()
-    conn.close()
-
-init_db()
+# MongoDB setup
+mongo_uri = os.environ.get("MONGO_URI")
+client = MongoClient(mongo_uri)
+db = client['portfolio']
+developers_collection = db['developers']
 
 # Page Routes
 
 @app.route('/')
 def home():
+    if 'username' in session:
+        return redirect(url_for('developers'))
     return render_template('index.html')
 
 @app.route('/projects')
@@ -54,12 +55,18 @@ def register():
             if password != confirm_password:
                 return "Passwords do not match! <a href='/registerbtn'>Try again</a>"
 
-            conn = sqlite3.connect('developers.db')
-            c = conn.cursor()
-            c.execute("INSERT INTO developers (username, email, password) VALUES (?, ?, ?)", 
-                      (userName, email, password))
-            conn.commit()
-            conn.close()
+            # Check if user exists
+            if developers_collection.find_one({'username': userName}):
+                return "Username already exists! <a href='/registerbtn'>Try again</a>"
+            
+            if developers_collection.find_one({'email': email}):
+                return "Email already exists! <a href='/registerbtn'>Try again</a>"
+
+            developers_collection.insert_one({
+                'username': userName,
+                'email': email,
+                'password': password
+            })
             return redirect(url_for('loginbtn'))
         except Exception as e:
             return f"An error occurred: {e}"
@@ -74,13 +81,11 @@ def login():
             userName = request.form['username']
             password = request.form['password']
             
-            conn = sqlite3.connect('developers.db')
-            c = conn.cursor()
-            c.execute("SELECT * FROM developers WHERE username = ? AND password = ?", (userName, password))
-            user = c.fetchone()
-            conn.close()
+            user = developers_collection.find_one({'username': userName, 'password': password})
             
             if user:
+                session.permanent = True
+                session['username'] = user['username']
                 return redirect(url_for('developers'))
             else:
                 return "Invalid Credentials. <a href='/loginbtn'>Go back</a>"
@@ -92,12 +97,67 @@ def login():
 
 @app.route('/developers')
 def developers():
-    conn = sqlite3.connect('developers.db')
-    c = conn.cursor()
-    c.execute("SELECT * FROM developers")
-    dev_list = c.fetchall()
-    conn.close()
-    return render_template('index1.html', developers=dev_list)
+    if 'username' not in session:
+        return redirect(url_for('loginbtn'))
+    username = session.get('username')
+    return render_template('index1.html', username=username)
+
+@app.route('/logout')
+def logout():
+    session.pop('username', None)
+    return redirect(url_for('home'))
+
+@app.route('/change_username', methods=['GET', 'POST'])
+def change_username():
+    if 'username' not in session:
+        return redirect(url_for('loginbtn'))
+        
+    if request.method == 'POST':
+        try:
+            new_username = request.form['new_username']
+            password = request.form['password']
+            current_username = session['username']
+            
+            user = developers_collection.find_one({'username': current_username, 'password': password})
+            if user:
+                if developers_collection.find_one({'username': new_username}):
+                    return "Username already taken! <a href='/change_username'>Try again</a>"
+                    
+                developers_collection.update_one({'username': current_username}, {'$set': {'username': new_username}})
+                session['username'] = new_username
+                return redirect(url_for('developers'))
+            else:
+                return "Incorrect password. <a href='/change_username'>Try again</a>"
+        except Exception as e:
+            return f"An error occurred: {e}"
+            
+    return render_template('change_username.html')
+
+@app.route('/change_password', methods=['GET', 'POST'])
+def change_password():
+    if 'username' not in session:
+        return redirect(url_for('loginbtn'))
+        
+    if request.method == 'POST':
+        try:
+            current_password = request.form['current_password']
+            new_password = request.form['new_password']
+            confirm_password = request.form['confirm_password']
+            current_username = session['username']
+            
+            if new_password != confirm_password:
+                return "New passwords do not match! <a href='/change_password'>Try again</a>"
+                
+            user = developers_collection.find_one({'username': current_username, 'password': current_password})
+            if user:
+                developers_collection.update_one({'username': current_username}, {'$set': {'password': new_password}})
+                return redirect(url_for('developers'))
+            else:
+                return "Incorrect current password. <a href='/change_password'>Try again</a>"
+        except Exception as e:
+            return f"An error occurred: {e}"
+            
+    return render_template('change_password.html')
 
 if __name__ == '__main__':
     app.run(debug=True)
